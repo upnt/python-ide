@@ -1,0 +1,13 @@
+FROM upnt/docker-neovim
+RUN apk update && \
+    ##apk add --update --no-cache --virtual .builddeps curl && \
+    apk add --update --no-cache --virtual .builddeps curl gcc musl-dev linux-headers make && \
+## install dein.vim
+    curl -sf https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh && \
+    sh ./installer.sh ~/.cache/dein && \
+# remove
+    rm ./installer.sh && \
+    apk del --purge .builddeps
+
+COPY nvim ~/.config/nvim
+RUN nvim -c "call dein#install()" -c UpdateRemotePlugins -c q!
