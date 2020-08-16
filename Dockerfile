@@ -3,11 +3,12 @@ FROM upnt/base-ide
 ENV LANG="en_US.UTF-8" LANGUAGE="en_US:ja" LC_ALL="en_US.UTF-8"
 
 RUN apk update && \
-    apk add --update --no-cache --virtual .builddeps curl gcc \
-            linux-headers && \
+    python  -m pip install -U pip && \
+    python3 -m pip install -U pip && \
+    python  -m pip install pipenv && \
+    python3 -m pip install pipenv && \
+    python  -m pip install jedi && \
     python3 -m pip install jedi && \
-# remove
-    apk del --purge .builddeps && \
 # add plugins
     echo "[[plugins]]" >> ~/.config/nvim/dein.toml && \
     echo "repo = 'davidhalter/jedi-vim'" >> ~/.config/nvim/dein.toml && \
