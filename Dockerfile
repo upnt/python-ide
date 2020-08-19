@@ -6,7 +6,6 @@ RUN apk update && \
     apk add --no-cache git && \
     git clone https://github.com/upnt/dotfiles && \
     cd dotfiles && \
-    cat ~/.config/nvim/init.vim >> dotfiles/nvim/init.vim && \
     bash init.sh && \
     bash deploy.sh nvim && \
     bash deploy.sh bash && \
@@ -20,3 +19,5 @@ RUN apk update && \
     echo "repo = 'zchee/deoplete-jedi'" >> ~/.config/nvim/dein.toml && \
 # install plugins
     nvim -c "call dein#install()" -c UpdateRemotePlugins -c q!
+
+ENTRYPOINT ["nvim"]
