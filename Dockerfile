@@ -3,7 +3,6 @@ FROM upnt/docvim-pyenv
 ENV LANG="en_US.UTF-8" LANGUAGE="en_US:ja" LC_ALL="en_US.UTF-8"
 
 RUN apk update && \
-    apk add --no-cache git && \
     git clone https://github.com/upnt/dotfiles && \
     cd dotfiles && \
     bash init.sh && \
