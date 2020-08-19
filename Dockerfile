@@ -6,6 +6,7 @@ RUN apk update && \
     apk add --no-cache git && \
     git clone https://github.com/upnt/dotfiles && \
     cd dotfiles && \
+    cat ~/.config/nvim/init.vim >> dotfiles/nvim/init.vim && \
     bash init.sh && \
     bash deploy.sh nvim && \
     bash deploy.sh bash && \
