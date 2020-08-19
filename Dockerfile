@@ -1,14 +1,14 @@
-FROM upnt/base-ide
+FROM upnt/docvim-pyenv
 
 ENV LANG="en_US.UTF-8" LANGUAGE="en_US:ja" LC_ALL="en_US.UTF-8"
 
 RUN apk update && \
-    python  -m pip install -U pip && \
-    python3 -m pip install -U pip && \
-    python  -m pip install pipenv && \
-    python3 -m pip install pipenv && \
-    python  -m pip install jedi && \
-    python3 -m pip install jedi && \
+    apk add --no-cache git && \
+    git clone https://github.com/upnt/dotfiles && \
+    cd dotfiles && \
+    bash init.sh && \
+    bash deploy.sh nvim && \
+    bash deploy.sh bash && \
 # add plugins
     echo "[[plugins]]" >> ~/.config/nvim/dein.toml && \
     echo "repo = 'davidhalter/jedi-vim'" >> ~/.config/nvim/dein.toml && \
@@ -19,5 +19,3 @@ RUN apk update && \
     echo "repo = 'zchee/deoplete-jedi'" >> ~/.config/nvim/dein.toml && \
 # install plugins
     nvim -c "call dein#install()" -c UpdateRemotePlugins -c q!
-
-ENTRYPOINT ["nvim"]
