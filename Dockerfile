@@ -9,7 +9,6 @@ RUN apk update && \
     bash deploy.sh nvim && \
     bash deploy.sh bash && \
     chmod u+x bin/* && \
-    apk add --update --no-cache neovim-remote && \
 # add plugins
     echo "[[plugins]]" >> ~/.config/nvim/dein.toml && \
     echo "repo = 'davidhalter/jedi-vim'" >> ~/.config/nvim/dein.toml && \
